@@ -1,16 +1,39 @@
-class PrintNameAndAge {
-  String name;
+class Player {
+  final String name;
   int age;
+  String teamColor;
 
-  PrintNameAndAge(this.name, this.age) {
-    sayHello();
-  }
+  Player.fromJson(Map<String, dynamic> playerJson)
+      : name = playerJson['name'],
+        age = playerJson['age'],
+        teamColor = playerJson['teamColor'];
 
   void sayHello() {
-    print("hello ${name} ${age}!!");
+    print("Hi $name ! your age is $age , teamColor is $teamColor");
   }
 }
 
 void main() {
-  PrintNameAndAge("chan", 28);
+  var apiData = [
+    {
+      "name": "chan",
+      "age": 28,
+      "teamColor": "blue",
+    },
+    {
+      "name": "ju",
+      "age": 25,
+      "teamColor": "yellow",
+    },
+    {
+      "name": "eun",
+      "age": 53,
+      "teamColor": "pink",
+    },
+  ];
+
+  apiData.forEach((playerJson) {
+    var player = Player.fromJson(playerJson);
+    player.sayHello();
+  });
 }
